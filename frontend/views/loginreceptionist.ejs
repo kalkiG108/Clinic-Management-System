@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Receptionist Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+      :root {
+        --primary-color: #34a853;
+        --secondary-color: #1a73e8;
+        --accent-color: #fbbc04;
+        --text-color: #202124;
+        --bg-light: #f8f9fa;
+      }
+
+      body {
+        background-color: #f0f2f5;
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2334a853' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .main-content {
+        flex: 1 0 auto;
+        padding-bottom: 4rem;
+      }
+
+      .hero-section {
+        background: linear-gradient(135deg, var(--primary-color) 0%, #2d8d47 100%);
+        padding: 4rem 0;
+        color: white;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1'/%3E%3C/svg%3E");
+        opacity: 0.4;
+      }
+
+      .login-container {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 1.5rem;
+        padding: 3rem 2rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        margin-top: -4rem;
+        position: relative;
+        z-index: 2;
+        backdrop-filter: blur(10px);
+      }
+
+      .login-header {
+        text-align: center;
+        margin-bottom: 2.5rem;
+      }
+
+      .login-header .icon-large {
+        font-size: 3.5rem;
+        background: linear-gradient(135deg, var(--primary-color), #2d8d47);
+        width: 100px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        margin: 0 auto 1.5rem;
+        color: white;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-floating {
+        margin-bottom: 1.25rem;
+      }
+
+      .form-control {
+        border-radius: 0.75rem;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        padding: 1rem;
+        height: calc(3.5rem + 2px);
+        font-size: 1rem;
+        transition: all 0.3s ease;
+      }
+
+      .form-control:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.25rem rgba(52, 168, 83, 0.1);
+      }
+
+      .btn-success {
+        background: linear-gradient(135deg, var(--primary-color), #2d8d47);
+        border: none;
+        border-radius: 50px;
+        padding: 0.875rem 2rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+      }
+
+      .btn-success:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .btn-warning {
+        background: linear-gradient(135deg, var(--accent-color), #f9a825);
+        border: none;
+        color: #fff;
+        border-radius: 50px;
+        padding: 0.875rem 2rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+      }
+
+      .btn-warning:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        color: #fff;
+      }
+
+      .btn-link {
+        color: var(--primary-color);
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .btn-link:hover {
+        color: #2d8d47;
+        text-decoration: underline;
+      }
+
+      .form-check-input:checked {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+      }
+
+      .footer {
+        background: #1a1c1e;
+        color: #ffffff;
+        padding: 1.5rem 0;
+        position: relative;
+        margin-top: auto;
+        width: 100%;
+        z-index: 10;
+      }
+
+      .footer-text {
+        font-size: 1rem;
+        font-weight: 500;
+        opacity: 0.9;
+      }
+
+      #otpSection {
+        opacity: 0;
+        height: 0;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+
+      #otpSection.show {
+        opacity: 1;
+        height: auto;
+        margin-top: 1.5rem;
+      }
+
+      @media (max-width: 768px) {
+        .login-container {
+          margin: -2rem 1rem 0;
+          padding: 2rem 1.5rem;
+        }
+      }
+    </style>
+    <script>
+      async function sendOTP() {
+        const receptionistId = document.getElementById("receptionistId").value;
+        const email = document.getElementById("email").value;
+
+        try {
+          const response = await fetch("/auth/send-otp", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ receptionistId, email }),
+          });
+
+          const data = await response.json();
+          if (data.success) {
+            const otpSection = document.getElementById("otpSection");
+            otpSection.classList.add("show");
+            document.getElementById("sendOTPButton").style.display = "none";
+            alert("✅ OTP sent successfully!");
+
+            const resendBtn = document.getElementById("resendOTPButton");
+            resendBtn.disabled = true;
+            resendBtn.classList.add("text-muted");
+
+            setTimeout(() => {
+              resendBtn.disabled = false;
+              resendBtn.classList.remove("text-muted");
+              resendBtn.classList.add("text-success");
+            }, 5000);
+          } else {
+            alert("❌ Invalid credentials! Please check your Receptionist ID and email.");
+          }
+        } catch (error) {
+          console.error("Error sending OTP:", error);
+          alert("❌ Failed to send OTP. Please try again.");
+        }
+      }
+
+      async function resendOTP() {
+        const receptionistId = document.getElementById("receptionistId").value;
+        const email = document.getElementById("email").value;
+
+        try {
+          const response = await fetch("/auth/send-otp", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ receptionistId, email }),
+          });
+
+          const data = await response.json();
+          if (data.success) {
+            alert("🔄 OTP resent successfully!");
+          } else {
+            alert("❌ Failed to resend OTP. Try again later.");
+          }
+        } catch (error) {
+          console.error("Error resending OTP:", error);
+          alert("❌ Failed to resend OTP. Please try again.");
+        }
+      }
+
+      async function handleLogin() {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const otp = document.getElementById("otpInput").value;
+        const rememberMe = document.getElementById("rememberMe").checked;
+
+        try {
+          const response = await fetch("/auth/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ 
+              email, 
+              password, 
+              otp, 
+              rememberMe,
+              role: "receptionist"
+            }),
+          });
+
+          const data = await response.json();
+          if (response.ok) {
+            localStorage.setItem("token", data.token);
+            alert("✅ Login successful! Redirecting...");
+            setTimeout(() => {
+              window.location.href = "/auth/receptionist-dashboard";
+            }, 1000);
+          } else {
+            alert("❌ " + data.error);
+          }
+        } catch (error) {
+          console.error("Login error:", error);
+          alert("❌ Login failed. Please try again.");
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="main-content">
+      <!-- Hero Section -->
+      <div class="hero-section">
+        <div class="container">
+          <div class="text-center position-relative">
+            <h1 class="display-4 fw-bold mb-3" style="color: white;">Receptionist Login</h1>
+            <p class="lead mb-0">Access your dashboard to manage appointments and registrations</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Login Form Section -->
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-8 col-lg-6">
+            <div class="login-container">
+              <div class="login-header">
+                <div class="icon-large">
+                  <i class="bi bi-person-workspace"></i>
+                </div>
+                <h2 class="fw-bold">Welcome Back</h2>
+                <p class="text-muted">Please login to your account</p>
+              </div>
+
+              <form id="loginForm">
+                <input type="hidden" name="role" value="receptionist">
+                
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="receptionistId" name="receptionistId" placeholder="Receptionist ID" required>
+                  <label for="receptionistId">Receptionist ID</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                  <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                  <label for="email">Email Address</label>
+                </div>
+
+                <div class="form-floating mb-4">
+                  <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                  <label for="password">Password</label>
+                </div>
+
+                <div class="d-grid">
+                  <button type="button" class="btn btn-warning" id="sendOTPButton" onclick="sendOTP()">
+                    <i class="bi bi-shield-lock me-2"></i>Send OTP
+                  </button>
+                </div>
+
+                <div id="otpSection">
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="otpInput" name="otp" placeholder="Enter OTP" required>
+                    <label for="otpInput">Enter OTP</label>
+                  </div>
+
+                  <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">
+                    <label class="form-check-label" for="rememberMe">Remember Me</label>
+                  </div>
+
+                  <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-success" onclick="handleLogin()">
+                      <i class="bi bi-box-arrow-in-right me-2"></i>Login
+                    </button>
+                    <button type="button" class="btn btn-link text-success" id="resendOTPButton" onclick="resendOTP()" disabled>
+                      <i class="bi bi-arrow-repeat me-2"></i>Resend OTP
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container text-center">
+        <p class="footer-text mb-0">&copy; 2024 Healthcare Plus - Advanced Healthcare Management System</p>
+      </div>
+    </footer>
+  </body>
+</html>

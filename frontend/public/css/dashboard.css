@@ -1,0 +1,103 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f8fafc;
+}
+
+.navbar {
+  height: 3.5rem;
+}
+
+.dashboard-main {
+  flex: 1 1 auto;
+  display: flex;
+  min-height: 0;
+  margin-top: 3.5rem; /* Add margin to account for fixed navbar */
+}
+
+.sidebar {
+  background: #0d6efd;
+  color: #fff;
+  min-width: 14.375rem; /* 230px */
+  max-width: 16.25rem;  /* 260px */
+  height: calc(100vh - 3.5rem - 3rem);
+  position: sticky;
+  top: 3.5rem;
+  padding-top: 2rem;
+}
+
+.sidebar .nav-link {
+  color: #fff;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  transition: background 0.2s;
+  font-size: 1.1rem;
+  padding: 0.7rem 1rem;
+}
+
+.sidebar .nav-link.active, .sidebar .nav-link:hover {
+  background: rgba(255,255,255,0.15);
+  border-radius: 0.5rem;
+}
+
+.sidebar .bi {
+  margin-right: 0.625rem;
+  font-size: 1.3rem;
+}
+
+.dashboard-content {
+  flex: 1 1 auto;
+  background: #f1f3f6;
+  padding: 2rem;
+  min-height: 0;
+  max-height: calc(100vh - 3.5rem - 3rem);
+  overflow-y: auto;
+}
+
+.footer {
+  height: 3rem;
+}
+
+.navbar .btn {
+  font-size: 1.1rem;
+  padding: 0.5rem 1.2rem;
+}
+
+@media (max-width: 991.98px) {
+  .dashboard-main {
+    flex-direction: column;
+  }
+  .sidebar {
+    min-width: 100%;
+    max-width: 100%;
+    height: auto;
+    position: static;
+    padding-top: 1rem;
+  }
+  .dashboard-content {
+    min-height: auto;
+    max-height: none;
+    padding: 1rem;
+  }
+  .navbar .btn {
+    font-size: 0.95rem;
+    padding: 0.35rem 0.7rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .navbar .btn {
+    font-size: 0.85rem;
+    padding: 0.25rem 0.5rem;
+  }
+} 
